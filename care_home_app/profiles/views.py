@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 def create_profile(request):
     """Create new profile"""
-    pass
 
 
 def edit_profile(request):
