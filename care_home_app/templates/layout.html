@@ -5,6 +5,9 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
+    <ul>
+      <li><a href="{% url 'profiles:create_client_profile' %}">Create Client</a></li>
+    </ul>
     {% block content %}{% endblock %}
   </body>
 </html>

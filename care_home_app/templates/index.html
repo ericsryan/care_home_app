@@ -2,4 +2,7 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}<h1>Hello!</h1>{% endblock %}
+{% block content %}
+  <h1>Hello!</h1>
+  <p><a href="{% url 'profiles:edit_client_profile' pk=1 %}">View client profile</a></p>
+{% endblock %}

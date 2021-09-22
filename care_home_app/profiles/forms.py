@@ -7,7 +7,24 @@ class ClientCreationForm(forms.ModelForm):
     class Meta:
         model = models.Client
         fields = (
-            'name',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'portrait',
+            'dob',
+            'admission_date',
+            'address',
+        )
+
+
+class ClientUpdateForm(forms.ModelForm):
+    """Form to update details of a client profile"""
+    class Meta:
+        model = models.Client
+        fields = (
+            'first_name',
+            'middle_name',
+            'last_name',
             'portrait',
             'dob',
             'admission_date',

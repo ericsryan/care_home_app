@@ -1,12 +1,12 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from . import forms
 from . import models
 
 def create_client_profile(request):
-    """Create new profile"""
+    """Create new Client profile"""
     form = forms.ClientCreationForm()
     if request.method == 'POST':
         form = forms.ClientCreationForm(data=request.POST)
@@ -16,9 +16,20 @@ def create_client_profile(request):
     return render(request, 'profiles/create_client_profile.html', {'form': form})
 
 
-def edit_profile(request):
-    """Edit profile"""
-    pass
+def edit_client_profile(request, pk):
+    """Edit Client profile"""
+    client = models.Client.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = forms.ClientUpdateForm(
+            request.POST,
+            instance=client
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = forms.ClientUpdateForm(instance=client)
+    return render(request, 'profiles/edit_client_profile.html', {'form': form})
 
 
 def delete_profile(request):
