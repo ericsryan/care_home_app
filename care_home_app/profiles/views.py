@@ -37,6 +37,7 @@ def delete_profile(request):
     pass
 
 
-def show_profile(request):
-    """Show the details of a profile"""
-    pass
+def view_client_profile(request, pk):
+    """Show the details of a client profile"""
+    client = get_object_or_404(models.Client, id=pk)
+    return render(request, 'profiles/view_client_profile.html', {'client': client})

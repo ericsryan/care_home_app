@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}Client Profile{% endblock %}
+
+{% block content %}
+  <style>
+    img {
+      width: 25%;
+    }
+  </style>
+  <h1>Client Profile</h1>
+  <img src="{{ client.portrait.url }}">
+  <h2>{% if client.first_name %}{{ client.first_name }}{% endif %} {% if client.middle_name %}{{ client.middle_name }}{% endif %} {% if client.last_name %}{{ client.last_name }}{% endif %}</h2>
+  {% if client.dob %}
+  <h3>Date of Birth</h3>
+  <p>{{ client.dob }}</p>
+  {% endif %}
+  {% if client.admission_date %}
+  <h3>Admission Date</h3>
+  <p>{{ client.admission_date }}</p>
+  {% endif %}
+  {% if client.address %}
+  <h3>Address</h3>
+  <p>{{ client.address }}</p>
+  {% endif %}
+  <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
+{% endblock %}
