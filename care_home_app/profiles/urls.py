@@ -15,9 +15,6 @@ urlpatterns = [
          views.view_client_profile,
          name='client_profile'),
     path('client-list/', views.view_client_list, name='client_list'),
-    path('remove-client-profile/<pk>/',
-         views.remove_client_profile,
-         name='remove_client_profile'),
     path('create-doctor-profile/',
          views.create_doctor_profile,
          name='create_doctor_profile'),
@@ -47,5 +44,9 @@ urlpatterns = [
     path('prescription-profile/<pk>/',
          views.view_prescription_profile,
          name='prescription_profile'),
+    path('create-new-bodyweight/<client_id>',
+      views.create_new_bodyweight,
+      name='create_new_bodyweight'),
+      path('bodyweight-list/<client_id>', views.view_bodyweight_list, name='bodyweight_list'),
 ]
 urlpatterns += staticfiles_urlpatterns()

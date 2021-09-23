@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Bodyweight List{% endblock %}
+
+{% block content %}
+  <ul>
+  {% for bodyweight in bodyweights %}
+    <li>{{ bodyweight.weight }} {{ bodyweight.date }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

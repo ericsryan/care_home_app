@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Client, Doctor, Medication, Prescription
+from .models import BodyWeight, Client, Doctor, Medication, Prescription
 
+admin.site.register(BodyWeight)
 admin.site.register(Client)
 admin.site.register(Doctor)
 admin.site.register(Medication)

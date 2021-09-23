@@ -14,7 +14,7 @@ class Client(models.Model):
     current_client = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.middle_name[0]}. {self.last_name}'
+        return f'{self.first_name} {self.last_name}'
 
 
 class Doctor(models.Model):
@@ -48,3 +48,12 @@ class Prescription(models.Model):
 
     def __str___(self):
         return f'{self.medication}'
+
+
+class BodyWeight(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.PROTECT)
+    weight = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.weight}'

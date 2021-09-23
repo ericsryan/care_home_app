@@ -111,3 +111,13 @@ class PrescriptionUpdateForm(forms.ModelForm):
             'prescribing_dr',
             'prescribed_to',
         )
+
+
+class NewBodyWeightForm(forms.ModelForm):
+    """Create new bodyweight record."""
+
+    class Meta:
+        model = models.BodyWeight
+        fields = (
+            'weight',
+        )

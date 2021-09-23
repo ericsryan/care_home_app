@@ -3,9 +3,26 @@
 {% block title %}Client List{% endblock %}
 
 {% block content %}
-  <ul>
-  {% for client in clients %}
-    <li><a href="{% url 'profiles:client_profile' pk=client.id %}">{{ client }}</a></li>
-  {% endfor %}
-  </ul>
+    <style>
+      .card-img-top {
+        width: 100%;
+        height: 25vw;
+        object-fit: cover;
+      }
+    </style>
+    <div class="row gy-5">
+      {% for client in clients %}
+
+          <div class="col-sm-4">
+            <a class="text-decoration-none text-dark" href="{% url 'profiles:client_profile' pk=client.id %}">
+              <div class="card" style="width: 18rem;">
+                <img src="{{ client.portrait.url }}" class="card-img-top" alt="{{ client }}">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{ client }}</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+      {% endfor %}
+    </div>
 {% endblock %}

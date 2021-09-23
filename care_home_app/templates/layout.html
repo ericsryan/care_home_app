@@ -3,24 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   </head>
   <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'profiles:client_list' %}">Clients</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'profiles:create_client_profile' %}">Create Client Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'profiles:create_doctor_profile' %}">Create Doctor Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'profiles:doctor_list' %}">View Doctor List</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'profiles:create_medication' %}">Create Medication</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:view' %}">My Account</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+            {% else %}
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
     <ul>
-      <li><a href="{% url 'index' %}">Home</a></li>
-      {% if user.is_authenticated %}
-        <li><a href="{% url 'profiles:create_client_profile' %}">Create Client Profile</a></li>
-        <li><a href="{% url 'profiles:client_list' %}">View Client List</a></li>
-        <li><a href="{% url 'profiles:create_doctor_profile' %}">Create Doctor Profile</a></li>
-        <li><a href="{% url 'profiles:doctor_list' %}">View Doctor List</a></li>
-        <li><a href="{% url 'profiles:create_medication' %}">Create Medication</a></li>
-        <li><a href="{% url 'profiles:medication_list' %}">View Medication List</a></li>
-        <li><a href="{% url 'profiles:create_prescription' %}">Create Prescription</a></li>
-        <li><a href="{% url 'accounts:view' %}">My Account</a></li>
-        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-      {% else %}
-        <li><a href="{% url 'accounts:login' %}">Login</a></li>
-      {% endif %}
+
     </ul>
-    {% block content %}{% endblock %}
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   </body>
 </html>

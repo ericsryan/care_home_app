@@ -43,18 +43,9 @@ def edit_client_profile(request, pk):
         form = forms.ClientUpdateForm(instance=client)
     return render(
         request,
-        'profiles/edit_profile.html',
-        {'form': form, 'edit_name': 'Client'}
+        'profiles/edit_client_profile.html',
+        {'form': form}
         )
-
-
-@login_required
-def remove_client_profile(request, pk):
-    """Set the client profile status to innactive."""
-    client = models.Client.objects.get(pk=pk)
-    client.current_client=False
-    client.save()
-    return HttpResponseRedirect(reverse('profiles:client_list'))
 
 
 @login_required
@@ -63,10 +54,17 @@ def view_client_profile(request, pk):
     client = get_object_or_404(models.Client, id=pk)
     doctors = models.Doctor.objects.filter(client__pk=pk)
     prescriptions = models.Prescription.objects.filter(prescribed_to=pk)
+    try:
+        weight = models.BodyWeight.objects.filter(client_id=pk).latest('date')
+    except:
+        weight = 'Not yet recorded'
     return render(
         request,
         'profiles/view_client_profile.html',
-        {'client': client, 'doctors': doctors, 'prescriptions': prescriptions}
+        {'client': client,
+         'doctors': doctors,
+         'prescriptions': prescriptions,
+         'weight': weight}
         )
 
 
@@ -245,3 +243,30 @@ def view_prescription_profile(request, pk):
         'profiles/view_prescription_profile.html',
         {'prescription': prescription}
         )
+
+#######################################################
+# Body weight creation, editing, and viewing #
+#######################################################
+@login_required
+def create_new_bodyweight(request, client_id):
+    """Create a new bodyweight record."""
+    form = forms.NewBodyWeightForm()
+    client = get_object_or_404(models.Client, id=client_id)
+    if request.method == 'POST':
+        form = forms.NewBodyWeightForm(request.POST)
+        if form.is_valid():
+            weight = form.cleaned_data['weight']
+            bodyweight = models.BodyWeight(client=client, weight=weight)
+            bodyweight.save()
+            return HttpResponseRedirect(reverse('profiles:client_list'))
+    return render(
+        request,
+        'profiles/create_profile.html',
+        {'form': form, 'creation_name': 'Bodyweight'})
+
+
+@login_required
+def view_bodyweight_list(request, client_id):
+    """List of all doctors."""
+    bodyweights = models.BodyWeight.objects.filter(client_id=client_id)
+    return render(request, 'profiles/bodyweight_list.html', {'bodyweights': bodyweights})

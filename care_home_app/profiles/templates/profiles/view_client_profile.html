@@ -8,9 +8,9 @@
       width: 25%;
     }
   </style>
-  <h1>Client Profile</h1>
+  <h1>{{ client.first_name }} {{ client.middle_name }} {{ client.last_name }}</h1>
   <img src="{{ client.portrait.url }}">
-  <h2>{{ client.first_name }} {{ client.middle_name }} {{ client.last_name }}</h2>
+
   {% if client.dob %}
   <h3>Date of Birth</h3>
   <p>{{ client.dob }}</p>
@@ -23,20 +23,20 @@
   <h3>Address</h3>
   <p>{{ client.address }}</p>
   {% endif %}
-  {% if doctors %}
+  <h3>Weight</h3>
+  <p>{{ weight }} lbs.</p>
+  <p><a href="{% url 'profiles:create_new_bodyweight' client_id=client.id %}">+ Record Bodyweight</a></p>
+  <p><a href="{% url 'profiles:bodyweight_list' client_id=client.id %}">View History</a></p>
   <h3>Doctors</h3>
     {% for doctor in doctors %}
       <p><a href="{% url 'profiles:doctor_profile' pk=doctor.id %}">{{ doctor }}—{{ doctor.specialty }}</a></p>
     {% endfor %}
-  {% endif %}
-  {% if prescriptions %}
   <h3>Medications</h3>
     {% for prescription in prescriptions %}
       <p><a href="{% url 'profiles:prescription_profile' pk=prescription.id %}">{{ prescription.medication }}</a></p>
     {% endfor %}
-  {% else %}
-  <p><a href="{% url 'profiles:create_prescription' %}">Create Prescription</a></p>
-  {% endif %}
+  <hr>
+  <p><a href="{% url 'profiles:create_prescription' %}">+ Add New Prescription</a></p>
+  <br>
   <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
-  <p><a href="{% url 'profiles:remove_client_profile' pk=client.id %}">Remove Profile</a></p>
 {% endblock %}
