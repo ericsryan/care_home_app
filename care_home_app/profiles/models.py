@@ -10,3 +10,6 @@ class Client(models.Model):
     admission_date = models.DateField()
     address = models.CharField(max_length=255)
     current_client = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'

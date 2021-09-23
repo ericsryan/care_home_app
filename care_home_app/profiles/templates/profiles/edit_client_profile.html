@@ -3,7 +3,7 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button id="saveBtn" type="submit">Save</button>

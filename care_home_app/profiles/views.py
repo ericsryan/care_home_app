@@ -22,6 +22,7 @@ def edit_client_profile(request, pk):
     if request.method == 'POST':
         form = forms.ClientUpdateForm(
             request.POST,
+            request.FILES,
             instance=client
         )
         if form.is_valid():
