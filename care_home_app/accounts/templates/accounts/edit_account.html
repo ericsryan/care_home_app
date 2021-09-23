@@ -7,8 +7,9 @@
 {% block content %}
   <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button id="saveBtn" type="submit">Edit</button>
+    {{ user_update_form.as_p }}
+    {{ user_account_update_form.as_p }}
+    <button id="saveBtn" type="submit">Save</button>
   </form>
 </div>
 {% endblock %}

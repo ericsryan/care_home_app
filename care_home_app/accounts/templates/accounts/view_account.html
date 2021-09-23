@@ -9,5 +9,17 @@
   <h3>Email</h3>
   <p>{{ user.email }}</p>
   {% endif %}
+  {% if user.useraccount.dob %}
+  <h3>DOB</h3>
+  <p>{{ user.useraccount.dob }}</p>
+  {% endif %}
+  {% if user.useraccount.address %}
+  <h3>Address</h3>
+  <p>{{ user.useraccount.address }}</p>
+  {% endif %}
+  {% if user.useraccount.phone %}
+  <h3>Phone</h3>
+  <p>{{ user.useraccount.phone }}</p>
+  {% endif %}
   <p><a href="{% url 'accounts:edit' %}">Edit Account</a></p>
 {% endblock %}
