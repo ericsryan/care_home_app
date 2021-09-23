@@ -85,3 +85,29 @@ class MedicationUpdateForm(forms.ModelForm):
             'name',
             'strength',
         )
+
+
+class PrescriptionCreationForm(forms.ModelForm):
+    """Form to create a new prescription."""
+
+    class Meta:
+        model = models.Prescription
+        fields = (
+            'medication',
+            'rx_instructions',
+            'prescribing_dr',
+            'prescribed_to',
+        )
+
+
+class PrescriptionUpdateForm(forms.ModelForm):
+    """Form to update an existing prescription."""
+
+    class Meta:
+        model = models.Prescription
+        fields = (
+            'medication',
+            'rx_instructions',
+            'prescribing_dr',
+            'prescribed_to',
+        )

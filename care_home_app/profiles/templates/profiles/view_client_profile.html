@@ -29,6 +29,14 @@
       <p><a href="{% url 'profiles:doctor_profile' pk=doctor.id %}">{{ doctor }}—{{ doctor.specialty }}</a></p>
     {% endfor %}
   {% endif %}
+  {% if prescriptions %}
+  <h3>Medications</h3>
+    {% for prescription in prescriptions %}
+      <p><a href="{% url 'profiles:prescription_profile' pk=prescription.id %}">{{ prescription.medication }}</a></p>
+    {% endfor %}
+  {% else %}
+  <p><a href="{% url 'profiles:create_prescription' %}">Create Prescription</a></p>
+  {% endif %}
   <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
   <p><a href="{% url 'profiles:remove_client_profile' pk=client.id %}">Remove Profile</a></p>
 {% endblock %}

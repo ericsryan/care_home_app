@@ -7,6 +7,9 @@ from . import forms
 from . import models
 
 
+#######################################################
+# Client creation, editing, deleting, and viewing #
+#######################################################
 @login_required
 def create_client_profile(request):
     """Create new Client profile."""
@@ -16,7 +19,10 @@ def create_client_profile(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('index'))
-    return render(request, 'profiles/create_client_profile.html', {'form': form})
+    return render(
+        request,
+        'profiles/create_profile.html',
+        {'form': form, 'creation_name': 'Client'})
 
 
 @login_required
@@ -56,10 +62,11 @@ def view_client_profile(request, pk):
     """Show the details of a client profile."""
     client = get_object_or_404(models.Client, id=pk)
     doctors = models.Doctor.objects.filter(client__pk=pk)
+    prescriptions = models.Prescription.objects.filter(prescribed_to=pk)
     return render(
         request,
         'profiles/view_client_profile.html',
-        {'client': client, 'doctors': doctors}
+        {'client': client, 'doctors': doctors, 'prescriptions': prescriptions}
         )
 
 
@@ -70,6 +77,9 @@ def view_client_list(request):
     return render(request, 'profiles/client_list.html', {'clients': clients})
 
 
+#######################################################
+# Doctor creation, editing, deleting, and viewing #
+#######################################################
 @login_required
 def create_doctor_profile(request):
     """Create new Doctor profile."""
@@ -79,7 +89,10 @@ def create_doctor_profile(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('index'))
-    return render(request, 'profiles/create_doctor_profile.html', {'form': form})
+    return render(
+        request,
+        'profiles/create_profile.html',
+        {'form': form, 'creation_name': 'Doctor'})
 
 
 @login_required
@@ -122,16 +135,22 @@ def view_doctor_list(request):
     doctors = models.Doctor.objects.all()
     return render(request, 'profiles/doctor_list.html', {'doctors': doctors})
 
-
+#######################################################
+# Medication creation, editing, deleting, and viewing #
+#######################################################
 @login_required
 def create_medication(request):
+    """Create a new medication profile."""
     form = forms.MedicationCreationForm()
     if request.method == 'POST':
         form = forms.MedicationCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('index'))
-    return render(request, 'profiles/create_medication.html', {'form': form})
+    return render(
+        request,
+        'profiles/create_profile.html',
+        {'form': form, 'creation_name': 'Medication'})
 
 
 @login_required
@@ -175,4 +194,54 @@ def view_medication_list(request):
         request,
         'profiles/medication_list.html',
         {'medications': medications}
+        )
+
+#######################################################
+# Medication creation, editing, deleting, and viewing #
+#######################################################
+@login_required
+def create_prescription(request):
+    """Create a new prescription profile."""
+    form = forms.PrescriptionCreationForm()
+    if request.method == 'POST':
+        form = forms.PrescriptionCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    return render(
+        request,
+        'profiles/create_profile.html',
+        {'form': form, 'creation_name': 'Prescription'})
+
+
+@login_required
+def edit_prescription_profile(request, pk):
+    """Edit a prescription profile."""
+    prescription = models.Prescription.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = forms.PrescriptionUpdateForm(
+            request.POST,
+            instance=prescription
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('profiles:prescription_profile',
+                                                args=[prescription.id]))
+    else:
+        form = forms.PrescriptionUpdateForm(instance=prescription)
+    return render(
+        request,
+        'profiles/edit_profile.html',
+        {'form': form, 'edit_name': 'Prescription'}
+        )
+
+
+@login_required
+def view_prescription_profile(request, pk):
+    """Show the details of a prescription profile."""
+    prescription = get_object_or_404(models.Prescription, id=pk)
+    return render(
+        request,
+        'profiles/view_prescription_profile.html',
+        {'prescription': prescription}
         )

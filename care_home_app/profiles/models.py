@@ -11,11 +11,6 @@ class Client(models.Model):
     admission_date = models.DateField()
     address = models.CharField(max_length=255)
     doctors = models.ManyToManyField('Doctor', blank=True)
-    prescriptions = models.ForeignKey(
-        'Prescription',
-        on_delete=models.PROTECT,
-        null=True
-        )
     current_client = models.BooleanField(default=True)
 
     def __str__(self):
@@ -48,8 +43,8 @@ class Prescription(models.Model):
     """Information for client prescriptions."""
     medication = models.ForeignKey('Medication', on_delete=models.PROTECT)
     rx_instructions = models.TextField()
-    prescribing_dr = models.ManyToManyField('Doctor', blank=True)
-    prescribed_to = models.ManyToManyField('Client', blank=True)
+    prescribing_dr = models.ForeignKey('Doctor', on_delete=models.PROTECT)
+    prescribed_to = models.ForeignKey('Client', on_delete=models.PROTECT)
 
     def __str___(self):
-        return f'{self.prescribed_to}—{self.medication}'
+        return f'{self.medication}'

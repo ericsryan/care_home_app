@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Prescription Profile{% endblock %}
+
+{% block content %}
+  <h1>Prescription Profile</h1>
+  <h2>Medication Name</h2>
+  <p>{{ prescription.medication }}</p>
+  <h2>Client</h2>
+  <p>{{ prescription.prescribed_to }}</p>
+  <h2>Prescribing Doctor</h2>
+  <p>{{ prescription.prescribing_dr }}</p>
+  <h2>Instructions</h2>
+  <p>{{ prescription.rx_instructions }}</p>
+
+
+  <p><a href="{% url 'profiles:edit_prescription_profile' pk=prescription.id %}">Edit Prescription</a></p>
+{% endblock %}
