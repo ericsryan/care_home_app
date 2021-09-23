@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Create New Profile{% endblock %}
+
+{% block content %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="saveBtn" type="submit">Create</button>
+  </form>
+{% endblock %}

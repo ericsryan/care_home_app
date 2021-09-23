@@ -59,3 +59,47 @@ def view_client_list(request):
     """List of all clients."""
     clients = models.Client.objects.filter(current_client=True)
     return render(request, 'profiles/client_list.html', {'clients': clients})
+
+
+@login_required
+def create_doctor_profile(request):
+    """Create new Doctor profile."""
+    form = forms.DoctorCreationForm()
+    if request.method == 'POST':
+        form = forms.DoctorCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    return render(request, 'profiles/create_doctor_profile.html', {'form': form})
+
+
+@login_required
+def edit_doctor_profile(request, pk):
+    """Edit a Doctor's profile."""
+    doctor = models.Doctor.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = forms.DoctorUpdateForm(
+            request.POST,
+            instance=doctor
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('profiles:doctor_profile',
+                                                args=[doctor.id]))
+    else:
+        form = forms.DoctorUpdateForm(instance=doctor)
+    return render(request, 'profiles/edit_doctor_profile.html', {'form': form})
+
+
+@login_required
+def view_doctor_profile(request, pk):
+    """Show the details of a doctor's profile."""
+    doctor = get_object_or_404(models.Doctor, id=pk)
+    return render(request, 'profiles/view_doctor_profile.html', {'doctor': doctor})
+
+
+@login_required
+def view_doctor_list(request):
+    """List of all doctors."""
+    doctors = models.Doctor.objects.all()
+    return render(request, 'profiles/doctor_list.html', {'doctors': doctors})

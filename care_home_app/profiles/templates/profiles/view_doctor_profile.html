@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Client Profile{% endblock %}
+
+{% block content %}
+  <h1>Doctor Profile</h1>
+  <h2>{% if doctor.first_name %}{{ doctor.first_name }}{% endif %} {% if doctor.last_name %}{{ doctor.last_name }}{% endif %}{% if doctor.suffix %}, {{ doctor.suffix }}{% endif %}</h2>
+  {% if doctor.specialty %}
+  <h3>Specialty</h3>
+  <p>{{ doctor.specialty }}</p>
+  {% endif %}
+  {% if doctor.address %}
+  <h3>Address</h3>
+  <p>{{ doctor.address }}</p>
+  {% endif %}
+  {% if doctor.phone %}
+  <h3>Phone</h3>
+  <p>{{ doctor.phone }}</p>
+  {% endif %}
+  <p><a href="{% url 'profiles:edit_doctor_profile' pk=doctor.id %}">Edit Profile</a></p>
+{% endblock %}
