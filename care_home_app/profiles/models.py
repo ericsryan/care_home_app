@@ -9,3 +9,4 @@ class Client(models.Model):
     dob = models.DateField()
     admission_date = models.DateField()
     address = models.CharField(max_length=255)
+    current_client = models.BooleanField(default=True)

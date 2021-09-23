@@ -6,7 +6,7 @@ from . import forms
 from . import models
 
 def create_client_profile(request):
-    """Create new Client profile"""
+    """Create new Client profile."""
     form = forms.ClientCreationForm()
     if request.method == 'POST':
         form = forms.ClientCreationForm(data=request.POST)
@@ -17,7 +17,7 @@ def create_client_profile(request):
 
 
 def edit_client_profile(request, pk):
-    """Edit Client profile"""
+    """Edit Client profile."""
     client = models.Client.objects.get(pk=pk)
     if request.method == 'POST':
         form = forms.ClientUpdateForm(
@@ -26,18 +26,28 @@ def edit_client_profile(request, pk):
         )
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('profiles:client_profile',
+                                                args=[client.id]))
     else:
         form = forms.ClientUpdateForm(instance=client)
     return render(request, 'profiles/edit_client_profile.html', {'form': form})
 
 
-def delete_profile(request):
-    """Delete profile"""
-    pass
+def remove_client_profile(request, pk):
+    """Set the client profile status to innactive."""
+    client = models.Client.objects.get(pk=pk)
+    client.current_client=False
+    client.save()
+    return HttpResponseRedirect(reverse('profiles:client_list'))
 
 
 def view_client_profile(request, pk):
-    """Show the details of a client profile"""
+    """Show the details of a client profile."""
     client = get_object_or_404(models.Client, id=pk)
     return render(request, 'profiles/view_client_profile.html', {'client': client})
+
+
+def view_client_list(request):
+    """List of all clients."""
+    clients = models.Client.objects.filter(current_client=True)
+    return render(request, 'profiles/client_list.html', {'clients': clients})

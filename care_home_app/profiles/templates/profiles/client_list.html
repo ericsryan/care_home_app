@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Client List{% endblock %}
+
+{% block content %}
+  <ul>
+  {% for client in clients %}
+    <li><a href="{% url 'profiles:client_profile' pk=client.id %}">{{ client.first_name }} {{ client.middle_name }} {{ client.last_name }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

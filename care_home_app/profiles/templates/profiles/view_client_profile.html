@@ -24,4 +24,5 @@
   <p>{{ client.address }}</p>
   {% endif %}
   <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
+  <p><a href="{% url 'profiles:remove_client_profile' pk=client.id %}">Remove Profile</a></p>
 {% endblock %}
