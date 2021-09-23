@@ -35,7 +35,11 @@ def edit_client_profile(request, pk):
                                                 args=[client.id]))
     else:
         form = forms.ClientUpdateForm(instance=client)
-    return render(request, 'profiles/edit_client_profile.html', {'form': form})
+    return render(
+        request,
+        'profiles/edit_profile.html',
+        {'form': form, 'edit_name': 'Client'}
+        )
 
 
 @login_required
@@ -93,7 +97,11 @@ def edit_doctor_profile(request, pk):
                                                 args=[doctor.id]))
     else:
         form = forms.DoctorUpdateForm(instance=doctor)
-    return render(request, 'profiles/edit_doctor_profile.html', {'form': form})
+    return render(
+        request,
+        'profiles/edit_profile.html',
+        {'form': form, 'edit_name': 'Doctor'}
+        )
 
 
 @login_required
@@ -141,7 +149,11 @@ def edit_medication_profile(request, pk):
                                                 args=[medication.id]))
     else:
         form = forms.MedicationUpdateForm(instance=medication)
-    return render(request, 'profiles/edit_medication_profile.html', {'form': form})
+    return render(
+        request,
+        'profiles/edit_profile.html',
+        {'form': form, 'edit_name': 'Medication'}
+        )
 
 
 @login_required
