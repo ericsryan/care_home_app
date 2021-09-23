@@ -4,6 +4,7 @@ from . import models
 
 class ClientCreationForm(forms.ModelForm):
     """Form to add a new client."""
+
     class Meta:
         model = models.Client
         fields = (
@@ -19,6 +20,7 @@ class ClientCreationForm(forms.ModelForm):
 
 class ClientUpdateForm(forms.ModelForm):
     """Form to update details of a client profile."""
+
     class Meta:
         model = models.Client
         fields = (
@@ -29,11 +31,13 @@ class ClientUpdateForm(forms.ModelForm):
             'dob',
             'admission_date',
             'address',
+            'doctors',
         )
 
 
 class DoctorCreationForm(forms.ModelForm):
     """Form to add a new doctor."""
+
     class Meta:
         model = models.Doctor
         fields = (
@@ -48,6 +52,7 @@ class DoctorCreationForm(forms.ModelForm):
 
 class DoctorUpdateForm(forms.ModelForm):
     """Form to update details of a client profile"""
+
     class Meta:
         model = models.Doctor
         fields = (

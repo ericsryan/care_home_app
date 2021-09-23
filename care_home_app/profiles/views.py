@@ -51,7 +51,8 @@ def remove_client_profile(request, pk):
 def view_client_profile(request, pk):
     """Show the details of a client profile."""
     client = get_object_or_404(models.Client, id=pk)
-    return render(request, 'profiles/view_client_profile.html', {'client': client})
+    doctors = models.Doctor.objects.filter(client__pk=pk)
+    return render(request, 'profiles/view_client_profile.html', {'client': client, 'doctors': doctors})
 
 
 @login_required
@@ -95,7 +96,8 @@ def edit_doctor_profile(request, pk):
 def view_doctor_profile(request, pk):
     """Show the details of a doctor's profile."""
     doctor = get_object_or_404(models.Doctor, id=pk)
-    return render(request, 'profiles/view_doctor_profile.html', {'doctor': doctor})
+    clients = models.Client.objects.filter(doctors__pk=pk)
+    return render(request, 'profiles/view_doctor_profile.html', {'doctor': doctor, 'clients': clients})
 
 
 @login_required

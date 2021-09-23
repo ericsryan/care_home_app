@@ -17,5 +17,11 @@
   <h3>Phone</h3>
   <p>{{ doctor.phone }}</p>
   {% endif %}
+  {% if clients %}
+  <h3>View client profiles</h3>
+    {% for client in clients %}
+      <p><a href="{% url 'profiles:client_profile' pk=client.id %}">{{ client }}</a></p>
+    {% endfor %}
+  {% endif %}
   <p><a href="{% url 'profiles:edit_doctor_profile' pk=doctor.id %}">Edit Profile</a></p>
 {% endblock %}

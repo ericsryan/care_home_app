@@ -23,6 +23,12 @@
   <h3>Address</h3>
   <p>{{ client.address }}</p>
   {% endif %}
+  {% if doctors %}
+  <h3>Doctors</h3>
+    {% for doctor in doctors %}
+      <p><a href="{% url 'profiles:doctor_profile' pk=doctor.id %}">{{ doctor }}—{{ doctor.specialty }}</a></p>
+    {% endfor %}
+  {% endif %}
   <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
   <p><a href="{% url 'profiles:remove_client_profile' pk=client.id %}">Remove Profile</a></p>
 {% endblock %}
