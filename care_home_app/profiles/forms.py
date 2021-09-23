@@ -63,3 +63,25 @@ class DoctorUpdateForm(forms.ModelForm):
             'address',
             'phone',
         )
+
+
+class MedicationCreationForm(forms.ModelForm):
+    """Form to create a new medication."""
+
+    class Meta:
+        model = models.Medication
+        fields = (
+            'name',
+            'strength',
+        )
+
+
+class MedicationUpdateForm(forms.ModelForm):
+    """Form to update an existing medication."""
+
+    class Meta:
+        model = models.Medication
+        fields = (
+            'name',
+            'strength',
+        )

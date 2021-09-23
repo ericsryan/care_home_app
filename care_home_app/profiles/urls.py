@@ -28,5 +28,15 @@ urlpatterns = [
     path('edit-doctor-profile/<pk>/',
          views.edit_doctor_profile,
          name='edit_doctor_profile'),
+    path('medication-profile/<pk>/',
+         views.view_medication_profile,
+         name='medication_profile'),
+    path('medication-list/', views.view_medication_list, name='medication_list'),
+    path('create-medication/',
+         views.create_medication,
+         name='create_medication'),
+    path('edit-medication-profile/<pk>/',
+         views.edit_medication_profile,
+         name='edit_medication_profile'),
 ]
 urlpatterns += staticfiles_urlpatterns()

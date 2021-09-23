@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Client Profile{% endblock %}
+
+{% block content %}
+  <h1>Medication Profile</h1>
+  <h2>{{ medication }}</h2>
+
+  <p><a href="{% url 'profiles:edit_medication_profile' pk=medication.id %}">Edit Medication</a></p>
+  <p><a href="{% url 'profiles:medication_list' %}">Return to Medication List</a></p>
+{% endblock %}
