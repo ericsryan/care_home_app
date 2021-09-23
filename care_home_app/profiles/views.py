@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -5,6 +6,8 @@ from django.urls import reverse
 from . import forms
 from . import models
 
+
+@login_required
 def create_client_profile(request):
     """Create new Client profile."""
     form = forms.ClientCreationForm()
@@ -16,6 +19,7 @@ def create_client_profile(request):
     return render(request, 'profiles/create_client_profile.html', {'form': form})
 
 
+@login_required
 def edit_client_profile(request, pk):
     """Edit Client profile."""
     client = models.Client.objects.get(pk=pk)
@@ -34,6 +38,7 @@ def edit_client_profile(request, pk):
     return render(request, 'profiles/edit_client_profile.html', {'form': form})
 
 
+@login_required
 def remove_client_profile(request, pk):
     """Set the client profile status to innactive."""
     client = models.Client.objects.get(pk=pk)
@@ -42,12 +47,14 @@ def remove_client_profile(request, pk):
     return HttpResponseRedirect(reverse('profiles:client_list'))
 
 
+@login_required
 def view_client_profile(request, pk):
     """Show the details of a client profile."""
     client = get_object_or_404(models.Client, id=pk)
     return render(request, 'profiles/view_client_profile.html', {'client': client})
 
 
+@login_required
 def view_client_list(request):
     """List of all clients."""
     clients = models.Client.objects.filter(current_client=True)
