@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+  <h1>Account</h1>
+  <h2>{% if user.first_name %}{{ user.first_name }}{% endif %} {% if user.last_name %}{{ user.last_name }}{% endif %}</h2>
+  {% if user.email %}
+  <h3>Email</h3>
+  <p>{{ user.email }}</p>
+  {% endif %}
+  <p><a href="{% url 'accounts:edit' %}">Edit Account</a></p>
+{% endblock %}

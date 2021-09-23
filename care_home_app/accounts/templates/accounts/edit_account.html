@@ -2,13 +2,13 @@
 
 {% load static %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Edit Account{% endblock %}
 
 {% block content %}
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button id="saveBtn" type="submit">Register</button>
+    <button id="saveBtn" type="submit">Edit</button>
   </form>
 </div>
 {% endblock %}

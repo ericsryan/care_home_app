@@ -7,8 +7,14 @@
   <body>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'profiles:create_client_profile' %}">Create Client Profile</a></li>
-      <li><a href="{% url 'profiles:client_list' %}">View Client List</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'profiles:create_client_profile' %}">Create Client Profile</a></li>
+        <li><a href="{% url 'profiles:client_list' %}">View Client List</a></li>
+        <li><a href="{% url 'accounts:view' %}">My Account</a></li>
+        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+      {% endif %}
     </ul>
     {% block content %}{% endblock %}
   </body>
