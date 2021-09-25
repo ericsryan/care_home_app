@@ -71,7 +71,7 @@ def view_client_profile(request, pk):
 @login_required
 def view_client_list(request):
     """List of all clients."""
-    clients = models.Client.objects.filter(current_client=True)
+    clients = models.Client.objects.filter(current_client=True).order_by('last_name')
     return render(request, 'profiles/client_list.html', {'clients': clients})
 
 

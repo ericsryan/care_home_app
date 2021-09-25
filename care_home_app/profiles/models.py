@@ -1,12 +1,14 @@
 from django.db import models
 
+from thumbnails.fields import ImageField
+
 
 class Client(models.Model):
     """Personal details for a care home client."""
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    portrait = models.ImageField(default='images/default.jpeg', upload_to='images')
+    portrait = ImageField(default='images/default.jpeg', resize_source_to='large', upload_to='images')
     dob = models.DateField()
     admission_date = models.DateField()
     address = models.CharField(max_length=255)

@@ -3,11 +3,6 @@
 {% block title %}Client Profile{% endblock %}
 
 {% block content %}
-  <style>
-    img {
-      width: 25%;
-    }
-  </style>
   <h1>{{ client.first_name }} {{ client.middle_name }} {{ client.last_name }}</h1>
   <img src="{{ client.portrait.url }}">
 

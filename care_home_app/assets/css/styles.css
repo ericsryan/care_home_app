@@ -1,0 +1,136 @@
+:root {
+  --clr-primary: #51608C;
+  --clr-primary-hover: #445075;
+  --clr-light-greyblue: #D5E2F2;
+  --clr-medium-grey: #8596A6;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+body {
+  font-family: Avenir, sans-serif;
+  min-height: 100vh;
+  place-items: center;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* Navbar styling */
+navbar {
+  padding: 0.5rem;
+  width: 100%;
+  min-width: 750px;
+}
+
+.nav-list {
+  background: var(--clr-primary);
+  margin: 0;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  border-radius: .5rem;
+}
+
+.nav-item {
+  list-style: none;
+  margin-left: 2rem;
+  font-size: 1.3em;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item:last-child {
+  margin-right: 2rem;
+}
+
+.nav-item a:hover {
+  color: var(--clr-light-greyblue);
+}
+
+
+.client-grid ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 2em;
+}
+
+
+/* Card styling */
+.card {
+  background-size: cover;
+  background-position: center;
+  padding: 10rem 0 0 ;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 4rem;
+  width: 200px;
+  height: 250px;
+  transition: transform 400ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: scale(1.05);
+}
+
+.card-content {
+  color: white;
+  --padding: 1rem;
+  padding: var(--padding);
+  background: linear-gradient(
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / .5) 20%,
+    hsl(0 0% 0% / .5)
+    );
+
+}
+
+.card-content h2 {
+  font-size: 1.3rem;
+}
+
+.card-title {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--padding) * -1);
+  bottom: -4px;
+  height: 5px;
+  width: calc(100% + var(--padding));
+  background: var(--clr-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms ease;
+}
+
+.card:hover .card-title::after,
+.card:focus-within .card-title::after {
+  transform: scaleX(1);
+}
+
+
+
+/* Utility Classes */
+.float-r {
+  margin-left: auto;
+}
