@@ -3,6 +3,8 @@
 {% block title %}Edit Client Profile{% endblock %}
 
 {% block content %}
+  <h1>Edit the client's profile</h1>
+  <img src="{{ client.portrait.url }}">
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

@@ -24,10 +24,10 @@ class ClientUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Client
         fields = (
+            'portrait',
             'first_name',
             'middle_name',
             'last_name',
-            'portrait',
             'dob',
             'admission_date',
             'address',

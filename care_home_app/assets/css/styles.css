@@ -134,3 +134,15 @@ navbar {
 .float-r {
   margin-left: auto;
 }
+
+
+
+form * {
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+form > * {
+  display: flex;
+  flex-direction: column;
+}

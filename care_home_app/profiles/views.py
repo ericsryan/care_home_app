@@ -44,7 +44,7 @@ def edit_client_profile(request, pk):
     return render(
         request,
         'profiles/edit_client_profile.html',
-        {'form': form}
+        {'form': form, 'client': client}
         )
 
 
