@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+    'pdf_filler.apps.PdfFillerConfig',
     'profiles.apps.ProfilesConfig',
     'thumbnails',
 ]

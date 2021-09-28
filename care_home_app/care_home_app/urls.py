@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profiles/', include('profiles.urls', namespace='profiles')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('pdf-filler/', include('pdf_filler.urls', namespace='pdf_filler')),
     path('', views.index, name='index'),
 ]
 urlpatterns += staticfiles_urlpatterns()

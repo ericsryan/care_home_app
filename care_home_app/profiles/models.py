@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 from thumbnails.fields import ImageField
@@ -17,6 +18,16 @@ class Client(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    @property
+    def age(self):
+        return (date.today().year - self.dob.year - ((
+                date.today().month,
+                date.today().day) < (self.dob.month, self.dob.day)))
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.middle_name} {self.last_name}'
 
 
 class Doctor(models.Model):
