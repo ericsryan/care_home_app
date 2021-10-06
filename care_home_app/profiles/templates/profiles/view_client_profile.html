@@ -33,5 +33,6 @@
   <hr>
   <p><a href="{% url 'profiles:create_prescription' %}">+ Add New Prescription</a></p>
   <br>
+  <p><a href="{% url 'pdf_filler:fill_LIC624' client_pk=client.id %}">Generate new SIR(LIC624)</a></p>
   <p><a href="{% url 'profiles:edit_client_profile' pk=client.id %}">Edit Profile</a></p>
 {% endblock %}

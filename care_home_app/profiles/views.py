@@ -7,9 +7,9 @@ from . import forms
 from . import models
 
 
-#######################################################
+###################################################
 # Client creation, editing, deleting, and viewing #
-#######################################################
+###################################################
 @login_required
 def create_client_profile(request):
     """Create new Client profile."""
@@ -75,9 +75,9 @@ def view_client_list(request):
     return render(request, 'profiles/client_list.html', {'clients': clients})
 
 
-#######################################################
+###################################################
 # Doctor creation, editing, deleting, and viewing #
-#######################################################
+###################################################
 @login_required
 def create_doctor_profile(request):
     """Create new Doctor profile."""
@@ -244,9 +244,9 @@ def view_prescription_profile(request, pk):
         {'prescription': prescription}
         )
 
-#######################################################
+##############################################
 # Body weight creation, editing, and viewing #
-#######################################################
+##############################################
 @login_required
 def create_new_bodyweight(request, client_id):
     """Create a new bodyweight record."""
@@ -267,6 +267,6 @@ def create_new_bodyweight(request, client_id):
 
 @login_required
 def view_bodyweight_list(request, client_id):
-    """List of all doctors."""
+    """List of all measured bodyweights."""
     bodyweights = models.BodyWeight.objects.filter(client_id=client_id)
     return render(request, 'profiles/bodyweight_list.html', {'bodyweights': bodyweights})

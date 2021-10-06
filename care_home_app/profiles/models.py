@@ -10,11 +10,13 @@ class Client(models.Model):
     middle_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     portrait = ImageField(default='images/default.jpeg', resize_source_to='large', upload_to='images')
+    sex = models.CharField(max_length=255)
     dob = models.DateField()
     admission_date = models.DateField()
     address = models.CharField(max_length=255)
     doctors = models.ManyToManyField('Doctor', blank=True)
     current_client = models.BooleanField(default=True)
+    uci_number = models.IntegerField()
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -28,6 +30,10 @@ class Client(models.Model):
     @property
     def full_name(self):
         return f'{self.first_name} {self.middle_name} {self.last_name}'
+
+    @property
+    def last_name_first(self):
+        return f'{self.last_name}, {self.first_name}'
 
 
 class Doctor(models.Model):
